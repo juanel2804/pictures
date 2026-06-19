@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Galeria del Pintor</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/">
+        <span class="brand-mark">GP</span>
+        <span id="brandName">Galeria del Pintor</span>
+      </a>
+      <nav class="top-actions">
+        <a href="#obras">Obras</a>
+        <button class="button ghost" id="loginOpenBtn">Iniciar sesion</button>
+        <button class="button ghost hidden" id="adminOpenBtn">Panel</button>
+        <button class="icon-button hidden" id="logoutBtn" aria-label="Cerrar sesion" title="Cerrar sesion">Salir</button>
+      </nav>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Obras originales disponibles</p>
+          <h1 id="heroTitle">Galeria del Pintor</h1>
+          <p class="hero-text">
+            Explora pinturas unicas, consulta detalles y contacta directamente por WhatsApp para comprar o pedir mas informacion.
+          </p>
+          <a class="button primary" href="#obras">Ver pinturas</a>
+        </div>
+        <div class="hero-art">
+          <div class="paint-preview preview-one"></div>
+          <div class="paint-preview preview-two"></div>
+          <div class="paint-preview preview-three"></div>
+        </div>
+      </section>
+
+      <section class="toolbar" id="obras">
+        <div>
+          <p class="eyebrow">Catalogo</p>
+          <h2>Pinturas en venta</h2>
+        </div>
+        <div class="search-box">
+          <span>Buscar</span>
+          <input id="searchInput" type="search" placeholder="Titulo, tecnica o descripcion" />
+        </div>
+      </section>
+
+      <section class="gallery-grid" id="galleryGrid"></section>
+      <section class="empty-state hidden" id="emptyState">
+        <h3>Aun no hay pinturas publicadas</h3>
+        <p>Cuando el administrador suba obras, apareceran aqui automaticamente.</p>
+      </section>
+    </main>
+
+    <dialog class="modal" id="loginModal">
+      <form class="modal-panel" id="loginForm">
+        <button class="close-button" type="button" data-close="loginModal" aria-label="Cerrar">x</button>
+        <h2>Inicio de sesion</h2>
+        <label>
+          Usuario
+          <input name="username" autocomplete="username" required />
+        </label>
+        <label>
+          Password
+          <input name="password" type="password" autocomplete="current-password" required />
+        </label>
+        <p class="form-message" id="loginMessage"></p>
+        <button class="button primary" type="submit">Entrar al panel</button>
+      </form>
+    </dialog>
+
+    <dialog class="modal admin-modal" id="adminModal">
+      <div class="admin-shell">
+        <aside class="admin-sidebar">
+          <div>
+            <p class="eyebrow">Panel privado</p>
+            <h2>Administrar galeria</h2>
+          </div>
+          <button class="button primary" id="newPaintingBtn">Nueva pintura</button>
+          <button class="button ghost" data-close="adminModal">Cerrar panel</button>
+        </aside>
+
+        <section class="admin-content">
+          <form class="settings-form" id="settingsForm">
+            <h3>Datos de la pagina</h3>
+            <label>
+              Nombre de la galeria
+              <input name="artist_name" id="artistNameInput" />
+            </label>
+            <label>
+              WhatsApp de ventas
+              <input name="whatsapp_phone" id="whatsappInput" placeholder="5210000000000" />
+            </label>
+            <button class="button secondary" type="submit">Guardar datos</button>
+          </form>
+
+          <form class="painting-form" id="paintingForm">
+            <h3 id="formTitle">Subir pintura</h3>
+            <input type="hidden" name="id" id="paintingId" />
+            <label>
+              Titulo
+              <input name="title" required />
+            </label>
+            <label>
+              Descripcion
+              <textarea name="description" rows="4" required></textarea>
+            </label>
+            <div class="form-row">
+              <label>
+                Precio MXN
+                <input name="price" type="number" min="0" step="0.01" required />
+              </label>
+              <label>
+                Tecnica
+                <input name="technique" placeholder="Oleo, acrilico..." />
+              </label>
+            </div>
+            <div class="form-row">
+              <label>
+                Medidas
+                <input name="dimensions" placeholder="60 x 80 cm" />
+              </label>
+              <label>
+                Imagen
+                <input name="image" type="file" accept="image/*" />
+              </label>
+            </div>
+            <label class="checkbox-label">
+              <input name="isAvailable" type="checkbox" checked />
+              Disponible
+            </label>
+            <p class="form-message" id="paintingMessage"></p>
+            <div class="form-actions">
+              <button class="button primary" type="submit">Guardar pintura</button>
+              <button class="button ghost" type="button" id="cancelEditBtn">Limpiar</button>
+            </div>
+          </form>
+
+          <div class="admin-list" id="adminList"></div>
+        </section>
+      </div>
+    </dialog>
+
+    <script src="/js/app.js" type="module"></script>
+  </body>
+</html>
